@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,22 +20,31 @@ Route::get('/tasks', function () {
 // INFO: CREATE TASK FORM _______________________________________________
 Route::view('/tasks/create', 'create')->name('tasks.create');
 
-// ______________________________________________________________________
+// INFO: SHOW A TASK ____________________________________________________
 Route::get('/tasks/{id}', function ($id) {
     return view('show', [
-        'task' => \App\Models\Task::findOrFail($id)
+        'task' => Task::findOrFail($id)
     ]);
 })->name('tasks.show');
 
 // INFO: RECEIVE TASK FORM ______________________________________________
 Route::post('/tasks', function (Request $request) {
-    dd($request->all());
-    // $attributes = request()->validate([
-    //     'title' => 'required',
-    //     'description' => 'required'
-    // ]);
-    // \App\Models\Task::create($attributes);
-    // return redirect()->route('tasks.index');
+    $data = $request->validate([
+        'title' => 'required|max:255',
+        'description' => 'required',
+        'long_description' => 'required'
+    ]);
+
+    $task = new Task();
+    $task->title = $data['title'];
+    $task->description = $data['description'];
+    $task->long_description = $data['long_description'];
+
+    $task->save();
+
+    return redirect()->route('tasks.show', [
+        'id' => $task->id
+    ]);
 })->name('tasks.store');
 
 
