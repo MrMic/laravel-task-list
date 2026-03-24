@@ -27,21 +27,25 @@
         @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control" id="title" name="title">
+            <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}">
             @error('title')
                 <p class="error-message">{{ $message }}</p>
             @enderror
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+            <textarea class="form-control" id="description" name="description" rows="3">
+                {{ old('description') }}
+            </textarea>
             @error('description')
                 <p class="error-message">{{ $message }}</p>
             @enderror
         </div>
         <div class="mb-3">
             <label for="long_description" class="form-label">Long Description</label>
-            <textarea class="form-control" id="long_description" name="long_description" rows="3"></textarea>
+            <textarea class="form-control" id="long_description" name="long_description" rows="3">
+                {{ old('long_description') }}
+            </textarea>
             @error('long_description')
                 <p class="error-message">{{ $message }}</p>
             @enderror
