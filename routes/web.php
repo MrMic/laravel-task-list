@@ -64,6 +64,14 @@ Route::delete("/tasks/{task}", function (Task $task) {
 })->name('tasks.destroy');
 
 // ______________________________________________________________________
+Route::put('/tasks/{task}/toggle-complete', function (Task $task) {
+    $task->toggleComplete();
+
+    return redirect()->back()
+        ->with("success", "Task completion status toggled successfully!");
+})->name('tasks.toggle-complete');
+
+// INFO: FALLBACK _______________________________________________________
 Route::fallback(function () {
     return '404 Not Found';
 });
