@@ -16,6 +16,18 @@
         .link {
             @apply rounded-md px-2 ring-1 ring-cyan-100 font-medium text-gray-700 text-cyan-500 bg-cyan-50 hover:text-cyan-800
         }
+
+        label {
+            @apply block uppercase text-gray-700 mb-2
+        }
+
+        input, textarea {
+            @apply shadow-sm border appearance-none  w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none
+        }
+
+        .error {
+            @apply text-red-500 text-sm mt-1
+        }
     </style>
     {{-- blade-formatter-enable --}}
 
